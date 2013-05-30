@@ -10,7 +10,10 @@ var allQuestions = [
    correctAnswer: 1}
 ];
 
-var putQuestion = function (q) {
+var choices = [];
+var numQuestions = allQuestions.length;
+
+var putQuestion = function (q, checked) {
   $("#question").text(q.question);
   var i, choice;
   for (i=0; i < q.choices.length; i++) {
@@ -19,26 +22,51 @@ var putQuestion = function (q) {
                   i + "\"/>");
     choice.append(q.choices[i]);
   }
+  if (typeof checked === "number") {
+    $("#choices").find("input[value='"+checked+"']").prop("checked", true);
+  }
+};
+
+var score = function (choices) {
+  var score = 0, i;
+  for (i=0; i < choices.length; i++) {
+    score +=  choices[i] === allQuestions[i].correctAnswer ? 1 : 0;
+  }
+  return score;
 };
 
 $(document).ready(function() {
   var qNum = 0;
-  var numQuestions = allQuestions.length;
-  var score = 0;
   var q = allQuestions[qNum];
 
   putQuestion(q);
 
   $("#quiz-element").on("click", "#next", function() {
-    var correct = q.correctAnswer === +$("input:checked").val();
-    if (correct) { score++; }
+    var choice = +$("#choices :checked").val();
+    var message = $(this).parent().find(".message");
+    if (isNaN(choice)) {
+      message.text("Please choose an answer before moving on; you can come back.");
+      return;
+
+    } else {
+      message.text("");
+      choices[qNum] = choice;
+    }
     $("#quiz-element").find("li").remove();
     if (qNum === numQuestions - 1) {
       $("#quiz-element").remove();
-      $("#score").text("Your score is " + score + "/" + numQuestions);
+      $("#score").text("Your score is " + score(choices) + "/" + numQuestions);
     } else {
       q = allQuestions[++qNum];
-      putQuestion(q);
+      putQuestion(q, choices[qNum]);
+    }
+  });
+
+  $("#quiz-element").on("click", "#back", function() {
+    if (qNum > 0) {
+      $("#quiz-element").find("li").remove();
+      q = allQuestions[--qNum];
+      putQuestion(q, choices[qNum]);
     }
   });
 });
