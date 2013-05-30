@@ -5,3 +5,7 @@ ul {
 .message {
     color: red;
 }
+
+li {
+    display: none;
+}

@@ -25,6 +25,7 @@ var putQuestion = function (q, checked) {
   if (typeof checked === "number") {
     $("#choices").find("input[value='"+checked+"']").prop("checked", true);
   }
+  $("#quiz-element").find("li").fadeIn();
 };
 
 var score = function (choices) {
@@ -52,7 +53,7 @@ $(document).ready(function() {
       message.text("");
       choices[qNum] = choice;
     }
-    $("#quiz-element").find("li").remove();
+    $("#quiz-element").find("li").fadeOut().remove();
     if (qNum === numQuestions - 1) {
       $("#quiz-element").remove();
       $("#score").text("Your score is " + score(choices) + "/" + numQuestions);
