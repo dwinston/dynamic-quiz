@@ -1,0 +1,30 @@
+[
+  {
+    "question": "Where am I?",
+    "choices": [
+      "here",
+      "there",
+      "everywhere"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "question": "What time is it?",
+    "choices": [
+      "now",
+      "3 o'clock, somewhere",
+      "game time"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "question": "What am I?",
+    "choices": [
+      "just a man",
+      "this moment",
+      "an egg",
+      "a shell"
+    ],
+    "correctAnswer": 1
+  }
+]
