@@ -3,10 +3,19 @@
     <title>Dynamic Quiz</title>
     <link rel="stylesheet" href="app.css" type="text/css" />
     <script type="text/javascript" src="jquery-2.0.1.min.js"></script>
+    <script type="text/javascript" src="jquery.cookie.js"></script>
     <script type="text/javascript" src="app.js"></script>
   </head>
   <body>
     <h1>Dynamic Quiz</h1>
+    <div id="login">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" />
+      <label for="nickname">Nickname:</label>
+      <input type="text" id="nickname" name="nickname" />
+      <button id="submitLogin">Login</button>
+    </div>
+    <span id="welcome"></span>
     <div id="quiz-element">
       <h2 id="question"></h2>
       <ul id="choices"></ul>
